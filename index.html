@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hisaab — Personal Budget Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ SIDEBAR NAVIGATION ============ -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6 8h20M6 16h20M6 24h13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="24" cy="24" r="4.5" stroke="currentColor" stroke-width="2"/>
+    </svg>
+    <div class="brand-text">
+      <span class="brand-name">Hisaab</span>
+      <span class="brand-tag">your budget, kept</span>
+    </div>
+  </div>
+
+  <nav class="nav" id="mainNav">
+    <button class="nav-item active" data-view="dashboard">
+      <svg viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm10 7h6V4h-6v16ZM4 20h6v-4H4v4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Dashboard</span>
+    </button>
+    <button class="nav-item" data-view="income">
+      <svg viewBox="0 0 24 24"><path d="M12 3v18M6 8c0-2 2-3 6-3s6 2 6 4-2 3-6 3-6 1-6 3 2 4 6 4 6-1 6-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Income</span>
+    </button>
+    <button class="nav-item" data-view="expenses">
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M3.5 10h17M7 14h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Expenses</span>
+    </button>
+    <button class="nav-item" data-view="savings" data-premium="true">
+      <svg viewBox="0 0 24 24"><path d="M12 3l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7L12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      <span>Savings Goal</span>
+      <span class="nav-lock" title="Premium feature">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5.5" y="10.5" width="13" height="9" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+    </button>
+    <button class="nav-item" data-view="rule" data-premium="true">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.5v17M4.4 8h15.2M4.4 16h15.2" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span>50/30/20 Rule</span>
+      <span class="nav-lock" title="Premium feature">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5.5" y="10.5" width="13" height="9" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+    </button>
+    <button class="nav-item" data-view="calculators" data-premium="true">
+      <svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M8 7.5h8M8 12h1.6M11.7 12h1.6M15.4 12h1.6M8 15.5h1.6M11.7 15.5h1.6M15.4 15.5h1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Calculators</span>
+      <span class="nav-lock" title="Premium feature">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5.5" y="10.5" width="13" height="9" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+    </button>
+    <button class="nav-item" data-view="data" data-premium="true">
+      <svg viewBox="0 0 24 24"><path d="M5 4h9l5 5v11H5V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 4v5h5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Data &amp; Export</span>
+      <span class="nav-lock" title="Premium feature">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="5.5" y="10.5" width="13" height="9" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+    </button>
+    <button class="nav-item nav-item-upgrade" data-view="subscription" id="navUpgradeBtn">
+      <svg viewBox="0 0 24 24"><path d="M4 8.5 8 11l4-6 4 6 4-2.5-1.6 9.5H5.6L4 8.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Upgrade</span>
+      <span class="nav-status-dot" id="navSubStatusDot"></span>
+    </button>
+  </nav>
+
+  <div class="sidebar-foot">
+    <label class="currency-picker">
+      <span>Currency</span>
+      <select id="currencySelect">
+        <option value="PKR" selected>₨ PKR — Pakistani Rupee</option>
+        <option value="USD">$ USD — US Dollar</option>
+        <option value="EUR">€ EUR — Euro</option>
+        <option value="GBP">£ GBP — British Pound</option>
+        <option value="AED">د.إ AED — UAE Dirham</option>
+        <option value="SAR">﷼ SAR — Saudi Riyal</option>
+        <option value="INR">₹ INR — Indian Rupee</option>
+      </select>
+    </label>
+  </div>
+</aside>
+
+<button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+  <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+</button>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main class="main">
+
+  <!-- ---------- DASHBOARD ---------- -->
+  <section class="view active" id="view-dashboard">
+    <header class="view-head">
+      <div>
+        <h1>Dashboard</h1>
+        <p class="sub">Your complete financial picture, updated live as you enter data.</p>
+      </div>
+      <span class="status-pill" id="budgetStatus">—</span>
+    </header>
+
+    <div class="sub-status-card" id="dashboardSubCard">
+      <!-- Filled dynamically by renderDashboardSubCard() -->
+    </div>
+
+    <div class="summary-grid">
+      <div class="sum-card">
+        <span class="sum-label">Total Income</span>
+        <span class="sum-value" id="sumTotalIncome">—</span>
+        <span class="sum-note">per month</span>
+      </div>
+      <div class="sum-card">
+        <span class="sum-label">Total Expenses</span>
+        <span class="sum-value" id="sumTotalExpenses">—</span>
+        <span class="sum-note">per month</span>
+      </div>
+      <div class="sum-card accent" id="sumRemainingCard">
+        <span class="sum-label" id="sumRemainingLabel">Remaining Budget</span>
+        <span class="sum-value" id="sumRemaining">—</span>
+        <span class="sum-note">per month</span>
+      </div>
+      <div class="sum-card">
+        <span class="sum-label">Savings Rate</span>
+        <span class="sum-value" id="sumSavingsRate">—</span>
+        <span class="sum-note">of income kept</span>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="panel">
+        <h2>Where the money goes</h2>
+        <p class="panel-sub">Expense breakdown by category, updated automatically.</p>
+        <div class="chart-wrap">
+          <canvas id="categoryChart"></canvas>
+          <p class="empty-note" id="chartEmptyNote">Add an expense to see the breakdown.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Budget across time</h2>
+        <p class="panel-sub">Same numbers, viewed daily, weekly, monthly and yearly.</p>
+        <table class="time-table">
+          <thead>
+            <tr><th>Period</th><th>Income</th><th>Expenses</th><th>Remaining</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Daily</td><td id="dailyIncome">—</td><td id="dailyExpenses">—</td><td id="dailyRemaining">—</td></tr>
+            <tr><td>Weekly</td><td id="weeklyIncome">—</td><td id="weeklyExpenses">—</td><td id="weeklyRemaining">—</td></tr>
+            <tr><td>Monthly</td><td id="monthlyIncome">—</td><td id="monthlyExpenses">—</td><td id="monthlyRemaining">—</td></tr>
+            <tr><td>Yearly</td><td id="yearlyIncome">—</td><td id="yearlyExpenses">—</td><td id="yearlyRemaining">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Financial insights</h2>
+      <p class="panel-sub">Notes generated from your own numbers as they change.</p>
+      <ul class="insights-list" id="insightsList">
+        <li class="insight-empty">Add income and expenses to generate insights.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ---------- INCOME ---------- -->
+  <section class="view" id="view-income">
+    <header class="view-head">
+      <div>
+        <h1>Income</h1>
+        <p class="sub">List every source you earn from, in whatever frequency it arrives.</p>
+      </div>
+    </header>
+
+    <div class="panel">
+      <h2 id="incomeFormTitle">Add an income source</h2>
+      <form id="incomeForm" class="entry-form" novalidate>
+        <input type="hidden" id="incomeEditId" value="">
+        <div class="field">
+          <label for="incomeCategory">Source</label>
+          <select id="incomeCategory" required>
+            <option value="">Choose a source…</option>
+            <option value="Salary">Salary</option>
+            <option value="Freelancing">Freelancing</option>
+            <option value="Business">Business</option>
+            <option value="Allowance">Allowance</option>
+            <option value="Rental Income">Rental Income</option>
+            <option value="Investments">Investments</option>
+            <option value="Other Income">Other Income</option>
+            <option value="__custom">Custom…</option>
+          </select>
+        </div>
+        <div class="field" id="incomeCustomWrap" hidden>
+          <label for="incomeCustomName">Custom source name</label>
+          <input type="text" id="incomeCustomName" maxlength="40" placeholder="e.g. Scholarship">
+        </div>
+        <div class="field">
+          <label for="incomeAmount">Amount</label>
+          <input type="number" id="incomeAmount" min="0" step="0.01" placeholder="0.00" required>
+        </div>
+        <div class="field">
+          <label for="incomeFrequency">Frequency</label>
+          <select id="incomeFrequency" required>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly" selected>Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+        <div class="field field-btn">
+          <button type="submit" class="btn btn-primary" id="incomeSubmitBtn">Add income</button>
+          <button type="button" class="btn btn-ghost" id="incomeCancelEdit" hidden>Cancel</button>
+        </div>
+      </form>
+      <p class="form-error" id="incomeFormError" hidden></p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-row">
+        <h2>Your income sources</h2>
+        <span class="total-chip">Total: <strong id="totalIncomeDisplay">—</strong> / month</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="incomeTable">
+          <thead>
+            <tr><th>Source</th><th>Amount</th><th>Frequency</th><th>Monthly equiv.</th><th></th></tr>
+          </thead>
+          <tbody id="incomeList">
+            <tr class="row-empty"><td colspan="5">No income sources yet — add one above.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- EXPENSES ---------- -->
+  <section class="view" id="view-expenses">
+    <header class="view-head">
+      <div>
+        <h1>Expenses</h1>
+        <p class="sub">Track everything you spend, organised by category.</p>
+      </div>
+    </header>
+
+    <div class="panel">
+      <h2 id="expenseFormTitle">Add an expense</h2>
+      <form id="expenseForm" class="entry-form" novalidate>
+        <input type="hidden" id="expenseEditId" value="">
+        <div class="field">
+          <label for="expenseGroup">Category</label>
+          <select id="expenseGroup" required></select>
+        </div>
+        <div class="field">
+          <label for="expenseSubcategory">Item</label>
+          <select id="expenseSubcategory" required></select>
+        </div>
+        <div class="field" id="expenseCustomWrap" hidden>
+          <label for="expenseCustomName">Custom item name</label>
+          <input type="text" id="expenseCustomName" maxlength="40" placeholder="e.g. Gym membership">
+        </div>
+        <div class="field">
+          <label for="expenseAmount">Amount</label>
+          <input type="number" id="expenseAmount" min="0" step="0.01" placeholder="0.00" required>
+        </div>
+        <div class="field">
+          <label for="expenseFrequency">Frequency</label>
+          <select id="expenseFrequency" required>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly" selected>Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+        </div>
+        <div class="field field-wide">
+          <label for="expenseDescription">Description <span class="opt">(optional)</span></label>
+          <input type="text" id="expenseDescription" maxlength="120" placeholder="Any note about this expense">
+        </div>
+        <div class="field field-btn">
+          <button type="submit" class="btn btn-primary" id="expenseSubmitBtn">Add expense</button>
+          <button type="button" class="btn btn-ghost" id="expenseCancelEdit" hidden>Cancel</button>
+        </div>
+      </form>
+      <p class="form-error" id="expenseFormError" hidden></p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-row">
+        <h2>Your expenses</h2>
+        <span class="total-chip">Total: <strong id="totalExpensesDisplay">—</strong> / month</span>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="expenseTable">
+          <thead>
+            <tr><th>Item</th><th>Category</th><th>Amount</th><th>Frequency</th><th>Monthly equiv.</th><th></th></tr>
+          </thead>
+          <tbody id="expenseList">
+            <tr class="row-empty"><td colspan="6">No expenses yet — add one above.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- SAVINGS GOAL ---------- -->
+  <section class="view" id="view-savings">
+    <header class="view-head">
+      <div>
+        <h1>Savings Goal</h1>
+        <p class="sub">Set a target and see exactly what it takes to reach it.</p>
+      </div>
+    </header>
+
+    <div class="panel">
+      <form id="savingsForm" class="entry-form" novalidate>
+        <div class="field">
+          <label for="goalAmount">Goal amount</label>
+          <input type="number" id="goalAmount" min="0" step="0.01" placeholder="e.g. 500000">
+        </div>
+        <div class="field">
+          <label for="currentSavings">Current savings</label>
+          <input type="number" id="currentSavings" min="0" step="0.01" placeholder="e.g. 200000">
+        </div>
+        <div class="field">
+          <label for="targetDate">Target date</label>
+          <input type="date" id="targetDate">
+        </div>
+        <div class="field field-btn">
+          <button type="submit" class="btn btn-primary">Save goal</button>
+        </div>
+      </form>
+      <p class="form-error" id="savingsFormError" hidden></p>
+    </div>
+
+    <div class="panel">
+      <h2>Progress</h2>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="goalProgressBar" style="width:0%"></div>
+      </div>
+      <p class="progress-caption"><span id="goalPercent">0%</span> of your goal reached</p>
+
+      <div class="mini-grid">
+        <div class="mini-stat"><span>Remaining to save</span><strong id="goalRemaining">—</strong></div>
+        <div class="mini-stat"><span>Days until target</span><strong id="goalDaysLeft">—</strong></div>
+        <div class="mini-stat"><span>Required per month</span><strong id="goalMonthly">—</strong></div>
+        <div class="mini-stat"><span>Required per week</span><strong id="goalWeekly">—</strong></div>
+        <div class="mini-stat"><span>Required per day</span><strong id="goalDaily">—</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- 50/30/20 RULE ---------- -->
+  <section class="view" id="view-rule">
+    <header class="view-head">
+      <div>
+        <h1>50/30/20 Rule</h1>
+        <p class="sub">Compare your spending against the classic needs / wants / savings split.</p>
+      </div>
+    </header>
+
+    <div class="panel">
+      <div class="rule-row">
+        <div class="rule-block">
+          <div class="rule-block-head"><span>Needs</span><span class="rule-target">50% recommended</span></div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="needsBar" style="width:0%"></div></div>
+          <p class="rule-figures"><strong id="needsActual">—</strong> actual vs <span id="needsRecommended">—</span> recommended</p>
+        </div>
+        <div class="rule-block">
+          <div class="rule-block-head"><span>Wants</span><span class="rule-target">30% recommended</span></div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="wantsBar" style="width:0%"></div></div>
+          <p class="rule-figures"><strong id="wantsActual">—</strong> actual vs <span id="wantsRecommended">—</span> recommended</p>
+        </div>
+        <div class="rule-block">
+          <div class="rule-block-head"><span>Savings / Debt</span><span class="rule-target">20% recommended</span></div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" id="savingsRuleBar" style="width:0%"></div></div>
+          <p class="rule-figures"><strong id="savingsRuleActual">—</strong> actual vs <span id="savingsRuleRecommended">—</span> recommended</p>
+        </div>
+      </div>
+      <p class="rule-note">Needs = Housing, Food, Transportation, Health, Education. Wants = Personal, Other. Savings/Debt = Financial category (loans, credit cards, insurance, investments, savings).</p>
+    </div>
+  </section>
+
+  <!-- ---------- CALCULATORS ---------- -->
+  <section class="view" id="view-calculators">
+    <header class="view-head">
+      <div>
+        <h1>Calculators</h1>
+        <p class="sub">Quick maths, percentages and loan repayments — no need to leave the page.</p>
+      </div>
+    </header>
+
+    <div class="calc-grid">
+      <div class="panel">
+        <h2>Quick calculator</h2>
+        <div class="quick-calc">
+          <input type="text" id="quickCalcDisplay" readonly value="0">
+          <div class="quick-calc-grid" id="quickCalcGrid">
+            <button data-key="7">7</button><button data-key="8">8</button><button data-key="9">9</button><button data-key="/" class="op">÷</button>
+            <button data-key="4">4</button><button data-key="5">5</button><button data-key="6">6</button><button data-key="*" class="op">×</button>
+            <button data-key="1">1</button><button data-key="2">2</button><button data-key="3">3</button><button data-key="-" class="op">−</button>
+            <button data-key="0">0</button><button data-key=".">.</button><button data-key="%" class="op">%</button><button data-key="+" class="op">+</button>
+            <button data-key="clear" class="wide">Clear</button><button data-key="=" class="op equals">=</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Percentage of amount</h2>
+        <form id="pctForm" class="entry-form" novalidate>
+          <div class="field">
+            <label for="pctAmount">Amount</label>
+            <input type="number" id="pctAmount" min="0" step="0.01" placeholder="e.g. 80000">
+          </div>
+          <div class="field">
+            <label for="pctPercent">Percentage</label>
+            <input type="number" id="pctPercent" step="0.01" placeholder="e.g. 25">
+          </div>
+          <div class="field field-btn"><button type="submit" class="btn btn-primary">Calculate</button></div>
+        </form>
+        <p class="calc-result" id="pctResult">Result will appear here.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Tax &amp; percentage change</h2>
+        <form id="taxForm" class="entry-form" novalidate>
+          <div class="field">
+            <label for="taxAmount">Amount</label>
+            <input type="number" id="taxAmount" min="0" step="0.01" placeholder="e.g. 100000">
+          </div>
+          <div class="field">
+            <label for="taxRate">Rate (%)</label>
+            <input type="number" id="taxRate" min="0" step="0.01" placeholder="e.g. 5">
+          </div>
+          <div class="field">
+            <label for="taxType">Type</label>
+            <select id="taxType">
+              <option value="tax">Tax (add)</option>
+              <option value="discount">Discount (subtract)</option>
+              <option value="increase">Increase (add)</option>
+              <option value="decrease">Decrease (subtract)</option>
+              <option value="profit">Profit margin (add)</option>
+              <option value="loss">Loss (subtract)</option>
+            </select>
+          </div>
+          <div class="field field-btn"><button type="submit" class="btn btn-primary">Calculate</button></div>
+        </form>
+        <p class="calc-result" id="taxResult">Result will appear here.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Loan / EMI calculator</h2>
+        <form id="loanForm" class="entry-form" novalidate>
+          <div class="field">
+            <label for="loanAmount">Loan amount</label>
+            <input type="number" id="loanAmount" min="0" step="0.01" placeholder="e.g. 1000000">
+          </div>
+          <div class="field">
+            <label for="loanRate">Annual interest rate (%)</label>
+            <input type="number" id="loanRate" min="0" step="0.01" placeholder="e.g. 12">
+          </div>
+          <div class="field">
+            <label for="loanDuration">Duration</label>
+            <input type="number" id="loanDuration" min="1" step="1" placeholder="e.g. 5">
+          </div>
+          <div class="field">
+            <label for="loanDurationUnit">Unit</label>
+            <select id="loanDurationUnit">
+              <option value="years">Years</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+          <div class="field field-btn"><button type="submit" class="btn btn-primary">Calculate EMI</button></div>
+        </form>
+        <div class="mini-grid" id="loanResults" hidden>
+          <div class="mini-stat"><span>Monthly payment</span><strong id="loanMonthlyPayment">—</strong></div>
+          <div class="mini-stat"><span>Total payment</span><strong id="loanTotalPayment">—</strong></div>
+          <div class="mini-stat"><span>Total interest</span><strong id="loanTotalInterest">—</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- DATA & EXPORT ---------- -->
+  <section class="view" id="view-data">
+    <header class="view-head">
+      <div>
+        <h1>Data &amp; Export</h1>
+        <p class="sub">Your entries are saved to this browser automatically. Manage or export them here.</p>
+      </div>
+    </header>
+
+    <div class="panel">
+      <h2>Storage</h2>
+      <p class="panel-sub">Data is kept in this browser's local storage, so it survives a refresh but stays on this device.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="saveBudgetBtn">Save budget</button>
+        <button class="btn btn-ghost" id="resetBudgetBtn">Reset to last save</button>
+        <button class="btn btn-danger" id="clearAllBtn">Clear all data</button>
+      </div>
+      <p class="save-status" id="saveStatus"></p>
+    </div>
+
+    <div class="panel">
+      <h2>Export &amp; print</h2>
+      <p class="panel-sub">Take your budget with you or hand in a clean printed copy.</p>
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="printBtn">Print budget</button>
+        <button class="btn btn-secondary" id="exportCsvBtn">Export as CSV</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- SUBSCRIPTION / UPGRADE ---------- -->
+  <section class="view" id="view-subscription">
+    <header class="view-head">
+      <div>
+        <h1>Hisaab Premium</h1>
+        <p class="sub">Unlock the complete budgeting toolkit — Savings Goal, the 50/30/20 Rule, Calculators, and Data &amp; Export.</p>
+      </div>
+      <span class="status-pill" id="subStatusPill">—</span>
+    </header>
+
+    <!-- Status / pricing hero, content generated by renderSubscriptionPage() -->
+    <div class="panel sub-hero" id="subHeroPanel"></div>
+
+    <!-- Payment method + form panel, shown once the user starts a subscribe/renew flow -->
+    <div class="panel" id="subPaymentPanel" hidden>
+      <h2>Choose a payment method</h2>
+      <p class="panel-sub">Amount due: <strong id="paymentAmountLabel">₨500</strong></p>
+
+      <div class="payment-methods" id="paymentMethods">
+        <label class="pay-method-card">
+          <input type="radio" name="paymentMethod" value="easypaisa">
+          <span class="pay-method-radio"></span>
+          <span class="pay-method-info">
+            <span class="pay-method-name">Easypaisa</span>
+            <span class="pay-method-desc">Mobile wallet transfer</span>
+          </span>
+        </label>
+        <label class="pay-method-card">
+          <input type="radio" name="paymentMethod" value="jazzcash">
+          <span class="pay-method-radio"></span>
+          <span class="pay-method-info">
+            <span class="pay-method-name">JazzCash</span>
+            <span class="pay-method-desc">Mobile wallet transfer</span>
+          </span>
+        </label>
+        <label class="pay-method-card">
+          <input type="radio" name="paymentMethod" value="bank">
+          <span class="pay-method-radio"></span>
+          <span class="pay-method-info">
+            <span class="pay-method-name">Bank Transfer</span>
+            <span class="pay-method-desc">Direct bank deposit</span>
+          </span>
+        </label>
+      </div>
+
+      <div id="paymentInstructions"></div>
+
+      <form id="paymentForm" class="entry-form" hidden novalidate>
+        <div id="paymentFormFields"></div>
+        <div class="field field-btn field-wide">
+          <button type="submit" class="btn btn-primary">Submit Payment</button>
+          <button type="button" class="btn btn-ghost" id="paymentCancelBtn">Cancel</button>
+        </div>
+      </form>
+      <p class="form-error" id="paymentFormError" hidden></p>
+    </div>
+
+    <!-- Demo verification panel — simulates a backend approving a pending payment -->
+    <div class="panel" id="demoVerifyPanel" hidden>
+      <h2>Demo Payment Verification</h2>
+      <p class="panel-sub">Hisaab is a frontend-only student project. No real payment gateway is connected, so no money has actually been transferred or verified. In a production version, verification would happen on a secure backend after your transaction clears. For demonstration purposes only, you can simulate that approval below.</p>
+      <button class="btn btn-secondary" id="demoApproveBtn">Simulate: Approve pending payment</button>
+    </div>
+
+    <div class="panel" id="subHistoryPanel" hidden>
+      <h2>Payment history</h2>
+      <div class="table-wrap">
+        <table class="data-table" id="paymentHistoryTable">
+          <thead>
+            <tr><th>Date</th><th>Method</th><th>Amount</th><th>Reference</th><th>Status</th></tr>
+          </thead>
+          <tbody id="paymentHistoryList"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ PRINT-ONLY SUMMARY ============ -->
+<div id="printSummary" class="print-only"></div>
+
+<!-- ============ CONFIRM MODAL ============ -->
+<div class="modal-overlay" id="confirmModal" hidden>
+  <div class="modal">
+    <h3 id="confirmModalTitle">Are you sure?</h3>
+    <p id="confirmModalText">This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="confirmNoBtn">Cancel</button>
+      <button class="btn btn-danger" id="confirmYesBtn">Yes, continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PREMIUM LOCK MODAL ============ -->
+<div class="modal-overlay" id="premiumLockModal" hidden>
+  <div class="modal modal-lock">
+    <span class="premium-badge">PREMIUM</span>
+    <h3>This feature is available with Hisaab Premium.</h3>
+    <p class="lock-price">₨500 <span>/ month</span></p>
+    <p>Unlock the complete Budget Calculator and all financial tools.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="lockCancelBtn">Not now</button>
+      <button class="btn btn-primary" id="lockSubscribeBtn">Subscribe Now</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
